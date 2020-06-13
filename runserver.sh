@@ -1,0 +1,4 @@
+export LINE_CHANNEL_SECRET='d852ad195397ab26a95560ce97661e2d'
+export LINE_CHANNEL_ACCESS_TOKEN='05twsDolrvYl1SeQOhRFAWV/MGyBnkXM98B9pRvJ/y/HKp5rJviXn4IBo+hKjp6PchkaAlcnlos6M/Mad4ZA/L2iXGBDp9K2zfqo2RjeY6MpUPR14Mnm0vfs81wddzC2oqQdvkXXq46F3VnFR1kr/gdB04t89/1O/w1cDnyilFU='
+
+python3 manage.py runserver 0:8001
