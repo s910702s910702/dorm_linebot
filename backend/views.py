@@ -24,6 +24,18 @@ from linebot.exceptions import *
 
 # ===================================
 
+# web page of management for admins
+class console(TemplateView):
+    template_name = "console.html"
+
+    def get(self, request):
+        return render(request, "console.html")
+
+
+    def post(self, request):
+        return render(request, "console.html")
+
+
 class register(TemplateView):
     template_name = 'register.html'
 
@@ -56,7 +68,7 @@ class hello(TemplateView):
 @csrf_exempt
 def callback(request):
     if request.method == 'POST':
-        
+
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
 
@@ -94,4 +106,4 @@ def callback(request):
 
 def pushss(request):
     line_bot_api.push_message('U71fdc4be604bd742d2c24a729ae2c688', TextSendMessage(text="奏外"))
-    return HttpResponse("已送出奏外") 
+    return HttpResponse("已送出奏外")
