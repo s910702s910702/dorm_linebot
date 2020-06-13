@@ -11,3 +11,10 @@ class Ppl(models.Model):
     secret = models.CharField(max_length=50, null = True)       #not true
     def __str__(self):
         return self.name + "_" + self.sid
+
+class Acc(models.Model):
+	un = models.CharField(max_length=100)
+	pw = models.CharField(max_length=500)
+	
+	# 1 - 5, 5 for boss
+	lvl = models.IntegerField()

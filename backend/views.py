@@ -10,6 +10,22 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 # register
 from django.views.generic import TemplateView
 
+# for linebot api
+from dorm_linebot import settings
+line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
+parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
+
+# linebot callback function
+from django.http import *
+from linebot.exceptions import *
+
+# hash
+
+
+# ===================================
+
+
+
 class hello(TemplateView):
 	template_name = 'hello.html'
 
@@ -26,14 +42,6 @@ class hello(TemplateView):
 
 		return render(request, 'hello.html')
 
-# for linebot api
-from dorm_linebot import settings
-line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
-parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
-
-# linebot callback function
-from django.http import *
-from linebot.exceptions import *
 
 @csrf_exempt
 def callback(request):
