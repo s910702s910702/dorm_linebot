@@ -24,7 +24,17 @@ from linebot.exceptions import *
 
 # ===================================
 
+class register(TemplateView):
+    template_name = 'register.html'
 
+    def get(self, request):
+        # check user detail from url
+        return render(request, 'register.html')
+
+
+    def post(self, request):
+        # update user data
+        return render(request, 'register.html')
 
 class hello(TemplateView):
 	template_name = 'hello.html'

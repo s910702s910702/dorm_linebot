@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('hello/', hello.as_view()),
 	path('callback/', callback),
-	path('pushss/', pushss)
+	path('pushss/', pushss),
+    path('register/', register.as_view()), 
 ]
