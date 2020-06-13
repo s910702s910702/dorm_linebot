@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% block content2 %}
+
 <form action="/hello/" method="post">{% csrf_token %}
     <div class="form-group">
         <label>姓名</label>
@@ -20,6 +21,79 @@
     <div class="form-group">
         <label>房號</label>
         <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>床別</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>局號</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>帳號</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>銀行名稱</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>分行名稱</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    
+    <div class="form-group">
+        <label>鑰匙<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>床<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>桌<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>椅<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>衣櫥<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>冷氣(含遙控)<input type="checkbox">完整(外觀+遙控器)<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>木門(含信箱)<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>窗簾<input type="checkbox">完整<input type="checkbox">缺<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>紗窗<input type="checkbox">完整<input type="checkbox">缺<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>玻璃窗<input type="checkbox">完整<input type="checkbox">缺<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div class="form-group">
+        <label>數據機<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+        <label>無，與隔壁共用<input type="checkbox"></label>
+    </div>
+    <div class="form-group">
+        <label>其他<input type="checkbox">完整<input type="checkbox">其他狀況</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+    <div>
+        <label>住宿同學遷入確認後簽名</label>
     </div>
     <input type="submit" name="complete" value="submit">
 </form>
