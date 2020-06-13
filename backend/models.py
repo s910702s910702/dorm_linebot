@@ -15,6 +15,6 @@ class Ppl(models.Model):
 class Acc(models.Model):
     un = models.CharField(max_length=100)
     pw = models.CharField(max_length=500)
-    s = models.CharField(max_length=100)
+    s = models.BinaryField()
     # 1 - 5, 5 for boss
     lvl = models.IntegerField()

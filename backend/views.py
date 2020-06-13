@@ -20,7 +20,11 @@ from django.http import *
 from linebot.exceptions import *
 
 # hash
+from backend.hasher import *
+import base64
 
+# sql
+from .models import *
 
 # ===================================
 
@@ -36,31 +40,50 @@ class console(TemplateView):
         return render(request, "console.html")
 
 
+# login page
 class register(TemplateView):
     template_name = 'register.html'
 
     def get(self, request):
-        # check user detail from url
         return render(request, 'register.html')
 
 
     def post(self, request):
-        # update user data
         return render(request, 'register.html')
 
 class hello(TemplateView):
-	template_name = 'hello.html'
+	# template_name = 'hello.html'
 
 	def get(self, request):
 		# check user detail from url
+		if request.session.get('is_login', None):
+			print("Should be redirect")
+			pass
+			# redirect to console
+			# return redirect('')
 		return render(request, 'hello.html')
 
 
 	def post(self, request):
 		# update user data
 		if 'complete' in request.POST:
-			name = request.POST['name']
-			print(name)
+			name = request.POST['username']
+			pw = request.POST['password']
+
+
+			# try exception
+			ob = Acc.objects.get(un=name)
+			salt = ob.s
+
+			pw_check = str(make_hash(salt, pw))
+
+			# TODO: not match
+			if(pw_check == ob.pw):
+				print("MATCH and be redirect")
+				request.session['is_login'] = True
+				request.session['lvl'] = ob.lvl
+				# return redirect()
+				pass
 
 		return render(request, 'hello.html')
 
