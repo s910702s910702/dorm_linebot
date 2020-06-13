@@ -13,8 +13,8 @@ class Ppl(models.Model):
         return self.name + "_" + self.sid
 
 class Acc(models.Model):
-	un = models.CharField(max_length=100)
-	pw = models.CharField(max_length=500)
-	
-	# 1 - 5, 5 for boss
-	lvl = models.IntegerField()
+    un = models.CharField(max_length=100)
+    pw = models.CharField(max_length=500)
+    s = models.CharField(max_length=100)
+    # 1 - 5, 5 for boss
+    lvl = models.IntegerField()
