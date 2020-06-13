@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content2 %}
+
+<form action="/hello/" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label>姓名</label>
+        <input type="text" class="form-control" name="name" placeholder="">
+    </div>
+      
+    <div class="form-group">
+        <label for="sid">學號</label>
+        <input type="text" class="form-control" name="sid" placeholder="">
+    </div>
+      
+    <div class="form-group">
+        <label for="grade">系級</label>
+        <input type="text" class="form-control" name="grade" placeholder="">
+    </div>
+      
+    <div class="form-group">
+        <label for="pnum">手機號碼</label>
+        <input type="text" class="form-control" name="pnum" placeholder="">
+    </div>
+      
+    <div class="form-group">
+        <label>房號</label>
+        <input type="text" class="form-control" name="rnum" placeholder="">
+    </div>
+ 
+    <input type="submit" name="complete" value="submit">
+</form>
+
+{% endblock %}
