@@ -58,6 +58,7 @@ class hello(TemplateView):
 		# check user detail from url
 		if request.session.get('is_login', None):
 			print("Should be redirect")
+			print(request.session.get('lvl'))
 			return redirect('/console/')
 
 		return render(request, 'hello.html', locals())
@@ -77,6 +78,7 @@ class hello(TemplateView):
 					print("MATCH and be redirect")
 					request.session['is_login'] = True
 					request.session['lvl'] = ob.lvl
+					request.session['username'] = ob.un
 					return redirect('/console/')
 					pass
 				else:
