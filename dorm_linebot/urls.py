@@ -25,5 +25,5 @@ urlpatterns = [
 	path('callback/', callback),
 	path('pushss/', pushss),
     path('register/', register.as_view()),
-    path("console/", console.as_view())
+    path("console/", console.as_view()),
 ]

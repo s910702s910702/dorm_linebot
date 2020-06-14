@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
@@ -30,26 +30,26 @@ from .models import *
 
 # web page of management for admins
 class console(TemplateView):
-    template_name = "console.html"
+	template_name = "console.html"
 
-    def get(self, request):
-        return render(request, "console.html")
+	def get(self, request):
+		return render(request, "console.html")
 
 
-    def post(self, request):
-        return render(request, "console.html")
+	def post(self, request):
+		return render(request, "console.html")
 
 
 # login page
 class register(TemplateView):
-    template_name = 'register.html'
+	template_name = 'register.html'
 
-    def get(self, request):
-        return render(request, 'register.html')
+	def get(self, request):
+		return render(request, 'register.html')
 
 
-    def post(self, request):
-        return render(request, 'register.html')
+	def post(self, request):
+		return render(request, 'register.html')
 
 class hello(TemplateView):
 	# template_name = 'hello.html'
@@ -58,10 +58,9 @@ class hello(TemplateView):
 		# check user detail from url
 		if request.session.get('is_login', None):
 			print("Should be redirect")
-			pass
-			# redirect to console
-			# return redirect('')
-		return render(request, 'hello.html')
+			return redirect('/console/')
+
+		return render(request, 'hello.html', locals())
 
 
 	def post(self, request):
@@ -70,63 +69,65 @@ class hello(TemplateView):
 			name = request.POST['username']
 			pw = request.POST['password']
 
+			try:
+				ob = Acc.objects.get(un=name)
+				salt = ob.s
 
-			# try exception
-			ob = Acc.objects.get(un=name)
-			salt = ob.s
+				if(str(make_hash(salt, pw)) == ob.pw):
+					print("MATCH and be redirect")
+					request.session['is_login'] = True
+					request.session['lvl'] = ob.lvl
+					return redirect('/console/')
+					pass
+				else:
+					message = "login failed"
+	
+			except:
+				message = "login failed"
 
-			pw_check = str(make_hash(salt, pw))
-
-			# TODO: not match
-			if(pw_check == ob.pw):
-				print("MATCH and be redirect")
-				request.session['is_login'] = True
-				request.session['lvl'] = ob.lvl
-				# return redirect()
-				pass
-
-		return render(request, 'hello.html')
+			
+		return render(request, 'hello.html', locals())
 
 
 @csrf_exempt
 def callback(request):
-    if request.method == 'POST':
+	if request.method == 'POST':
 
-        signature = request.META['HTTP_X_LINE_SIGNATURE']
-        body = request.body.decode('utf-8')
+		signature = request.META['HTTP_X_LINE_SIGNATURE']
+		body = request.body.decode('utf-8')
 
-        try:
-            events = parser.parse(body, signature)
-        except InvalidSignatureError:
-            return HttpResponseForbidden()
-        except LineBotApiError:
-            return HttpResponseBadRequest()
+		try:
+			events = parser.parse(body, signature)
+		except InvalidSignatureError:
+			return HttpResponseForbidden()
+		except LineBotApiError:
+			return HttpResponseBadRequest()
 
-        for event in events:
-            # if isinstance(event, MessageEvent):
-            #     res = json.loads(str(event.source))
-            #     print(res['userId'])
+		for event in events:
+			# if isinstance(event, MessageEvent):
+			#	 res = json.loads(str(event.source))
+			#	 print(res['userId'])
 
-            #     if is_secret(event.message.text) == True:
-            #         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='666' + res['userId']))
-            #         print(Ppl.objects.get(secret = event.message.text).name)
-            #         Ppl.objects.filter(secret = event.message.text).update(lineuid = res['userId'])
-            #         print(event)
+			#	 if is_secret(event.message.text) == True:
+			#		 line_bot_api.reply_message(event.reply_token,TextSendMessage(text='666' + res['userId']))
+			#		 print(Ppl.objects.get(secret = event.message.text).name)
+			#		 Ppl.objects.filter(secret = event.message.text).update(lineuid = res['userId'])
+			#		 print(event)
 
-            print(event)
-            if isinstance(event, MessageEvent):
-                if isinstance(event.message, TextMessage):
-                    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
-                    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.userId))
-                    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
-
-
+			print(event)
+			if isinstance(event, MessageEvent):
+				if isinstance(event.message, TextMessage):
+					# line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+					# line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.userId))
+					line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 
 
-        return HttpResponse()
-    else:
-        return HttpResponseBadRequest()
+
+
+		return HttpResponse()
+	else:
+		return HttpResponseBadRequest()
 
 def pushss(request):
-    line_bot_api.push_message('U71fdc4be604bd742d2c24a729ae2c688', TextSendMessage(text="奏外"))
-    return HttpResponse("已送出奏外")
+	line_bot_api.push_message('U71fdc4be604bd742d2c24a729ae2c688', TextSendMessage(text="奏外"))
+	return HttpResponse("已送出奏外")
