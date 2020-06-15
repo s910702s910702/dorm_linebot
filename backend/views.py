@@ -40,7 +40,7 @@ class console(TemplateView):
 		return render(request, "console.html")
 
 
-# login page
+
 class register(TemplateView):
 	template_name = 'register.html'
 
@@ -51,6 +51,7 @@ class register(TemplateView):
 	def post(self, request):
 		return render(request, 'register.html')
 
+# login page
 class hello(TemplateView):
 	# template_name = 'hello.html'
 
@@ -75,7 +76,7 @@ class hello(TemplateView):
 				salt = ob.s
 
 				if(str(make_hash(salt, pw)) == ob.pw):
-					print("MATCH and be redirect")
+					print("MATCH and Redirect")
 					request.session['is_login'] = True
 					request.session['lvl'] = ob.lvl
 					request.session['username'] = ob.un
