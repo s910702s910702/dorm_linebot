@@ -1,2 +1,4 @@
 runserver.sh
+backend/__pycache__/
+dorm_linebot/__pycache__/
 
